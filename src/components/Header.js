@@ -72,7 +72,14 @@ const HeaderLeft = styled.div`
 `;
 
 const HeaderRight = styled.div`
-
+    flex: 0.3;
+    display: flex;
+    align-items: flex-end;
+    
+    > .MuiSvgIcon-root {
+        margin-left: auto;
+        margin-right: 20px;
+    }
 `;
 
 const HeaderAvatar = styled(Avatar)`
