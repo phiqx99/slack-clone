@@ -29,6 +29,8 @@ padding: 20px;
 `;
 
 const MessageInfo = styled.div`
+margin-left: 10px;
+
 > h4 > span {
     color: gray;
     font-weight: 300;

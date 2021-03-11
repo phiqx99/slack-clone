@@ -3,14 +3,15 @@ import React, { useState } from 'react';
 import styled from "styled-components";
 import { db } from '../firebase';
 import firebase from 'firebase';
+import { auth } from '../firebase';
+import { useAuthState } from 'react-firebase-hooks/auth';
 
 function ChatInput({ channelName, channelId, chatRef }) {
     const [input, setInput] = useState("");
+    const [user, loading] = useAuthState(auth)
 
     const sendMessage = e => {
         e.preventDefault();
-
-        console.log(channelId);
 
         if (!channelId) {
             return false;
@@ -19,10 +20,9 @@ function ChatInput({ channelName, channelId, chatRef }) {
         db.collection('rooms').doc(channelId).collection("messages").add({
             message: input,
             timestamp: firebase.firestore.FieldValue.serverTimestamp(),
-            user: 'Nenevader',
-            userImage: 'https://i.pinimg.com/originals/30/54/57/3054574c57882ef00bbc3f02cd01f3d2.png'
+            user: user.displayName,
+            userImage: user.photoURL
         });
-console.log(chatRef);
         chatRef.current.scrollIntoView({
             behavior: "smooth"
         });
